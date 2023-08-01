@@ -21,7 +21,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#004385"
-      }
+      },
+      "package": "com.simplyweather"
     },
     "web": {
       "favicon": "./assets/favicon.png"
