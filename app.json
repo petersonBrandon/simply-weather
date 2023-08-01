@@ -2,7 +2,7 @@
   "expo": {
     "name": "Simply Weather",
     "slug": "simply-weather",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -11,9 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#004385"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -22,7 +20,8 @@
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#004385"
       },
-      "package": "com.simplyweather"
+      "package": "com.simplyweather",
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/favicon.png"
