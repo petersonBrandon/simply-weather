@@ -147,7 +147,6 @@ export default function Home() {
 
   React.useEffect(() => {
     const setup = async () => {
-      setLoading(true);
       const storedData = await getData(Store.LOCATION);
       if (
         storedData.useLocation ||
@@ -156,6 +155,7 @@ export default function Home() {
       ) {
         await setWeatherByLocationAsync();
       }
+      setLoading(true);
       await getWeatherDataAsync();
       setLoading(false);
     };
