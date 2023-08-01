@@ -149,7 +149,11 @@ export default function Home() {
     const setup = async () => {
       setLoading(true);
       const storedData = await getData(Store.LOCATION);
-      if (storedData.useLocation) {
+      if (
+        storedData.useLocation ||
+        storedData == null ||
+        storedData == undefined
+      ) {
         await setWeatherByLocationAsync();
       }
       await getWeatherDataAsync();
