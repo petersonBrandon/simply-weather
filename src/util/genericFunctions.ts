@@ -1,5 +1,4 @@
 import { Status } from "../types/enums";
-import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 /**
@@ -37,37 +36,31 @@ export const getStatusIcon = (status: Status) => {
  * @returns weather object
  */
 export const getWeatherData = async (
-  lat: string,
-  lon: string
+  lat: number,
+  lon: number
 ): Promise<OneCallWeatherTypes | void> => {
-  return await axios
-    .get(
+  try {
+    const response = await fetch(
       `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${process.env.EXPO_PUBLIC_OPEN_WEATHER_API_KEY}`
-    )
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      console.log(error);
-      throw error;
-    });
+    );
+    return response.json();
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const getLocationData = async (
   lat: string | number,
   lon: string | number
 ): Promise<ReverseGeocodeAPITypes | void> => {
-  return await axios
-    .get(
+  try {
+    const response = await fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${process.env.EXPO_PUBLIC_GOOGLE_MAPS_KEY}`
-    )
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      console.log(error);
-      throw error;
-    });
+    );
+    return response.json();
+  } catch (error) {
+    throw error;
+  }
 };
 
 /**
@@ -78,17 +71,14 @@ export const getZipcodeData = async (
   zipcode: string
 ): Promise<ZipcodeAPITypes | void> => {
   const countryCode = "US";
-  return await axios
-    .get(
-      `http://api.openweathermap.org/geo/1.0/zip?zip=${zipcode},${countryCode}&appid=${process.env.EXPO_PUBLIC_OPEN_WEATHER_API_KEY}`
-    )
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      console.log(error);
-      throw error;
-    });
+  try {
+    const response = await fetch(
+      `https://api.openweathermap.org/geo/1.0/zip?zip=${zipcode},${countryCode}&appid=${process.env.EXPO_PUBLIC_OPEN_WEATHER_API_KEY}`
+    );
+    return response.json();
+  } catch (error) {
+    throw error;
+  }
 };
 
 /**
