@@ -59,8 +59,18 @@ export default function Home() {
   }, []);
 
   const getWeatherDataAsync = async () => {
-    const locationData = await getData(Store.LOCATION);
-    setLocation(locationData);
+    let locationData: StorageTypes | null = await getData(Store.LOCATION);
+    if (locationData !== null) setLocation(locationData);
+    else {
+      locationData = {
+        zipcode: "12345",
+        useLocation: false,
+        longitude: -73.9592122,
+        latitude: 42.8021504,
+        city: "Schenectady",
+      };
+      setLocation(locationData);
+    }
     try {
       const weatherData: OneCallWeatherTypes | void = await getWeatherData(
         locationData.latitude,
@@ -139,7 +149,7 @@ export default function Home() {
     } catch (error) {
       const temp = JSON.parse(JSON.stringify(showAlert));
       temp.title = "Could not get location data";
-      temp.message = "Try again later";
+      temp.message = `${error}`;
       temp.visible = true;
       setShowAlert(temp);
     }
@@ -147,15 +157,11 @@ export default function Home() {
 
   React.useEffect(() => {
     const setup = async () => {
+      setLoading(true);
       const storedData = await getData(Store.LOCATION);
-      if (
-        storedData.useLocation ||
-        storedData == null ||
-        storedData == undefined
-      ) {
+      if (storedData == null || storedData.useLocation) {
         await setWeatherByLocationAsync();
       }
-      setLoading(true);
       await getWeatherDataAsync();
       setLoading(false);
     };
@@ -257,7 +263,7 @@ export default function Home() {
                 } catch (error) {
                   const temp = JSON.parse(JSON.stringify(showAlert));
                   temp.title = "Could not get location data";
-                  temp.message = "Try again later";
+                  temp.message = `${error}`;
                   temp.visible = true;
                   setShowAlert(temp);
                 }
@@ -288,7 +294,10 @@ export default function Home() {
             style={{
               alignItems: "center",
               justifyContent: "center",
-              padding: 5,
+              paddingHorizontal: 10,
+              height: "100%",
+              position: "absolute",
+              right: 0,
             }}
           >
             <Icon
@@ -296,8 +305,7 @@ export default function Home() {
               size={20}
               color="#101010"
               style={{
-                position: "absolute",
-                right: 10,
+                position: "relative",
                 transform: [{ rotate: "45deg" }],
               }}
             />
