@@ -17,9 +17,9 @@ Simply Weather does precisely what the name suggests - it brings you straightfor
 - **⚡ Lightweight and fast**: Our app is designed to be resource-efficient, ensuring smooth performance even on older devices.
 - **💵 No hidden costs**: Simply Weather is entirely free to use, and we have no plans for any hidden charges in the future.
 
-## Coming soon
+## Get it on Android 🤖
 
-Comming to Android 🤖 August 2023
+[Simply Weather on the Google Play Store](https://play.google.com/store/apps/details?id=com.simplyweather)
 
 ## Support
 
